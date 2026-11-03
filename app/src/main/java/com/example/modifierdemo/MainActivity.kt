@@ -22,9 +22,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.painterResource
-
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.draw.clip
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,6 +47,7 @@ fun DemoScreen(modifier: Modifier = Modifier) {
     val mymodifier = modifier
         .border(width = 2.dp, color = Color.Black)
         .padding(all = 10.dp)
+    val secondModifier = Modifier.height(100.dp)
 
     Column(
         Modifier.padding(20.dp),
@@ -53,12 +56,19 @@ fun DemoScreen(modifier: Modifier = Modifier) {
     ) {
         Text(
             "Hello Compose",
-            mymodifier,
+            mymodifier.then(secondModifier),
             fontSize = 40.sp,
             fontWeight = FontWeight.Bold
         )
         Spacer(Modifier.height(16.dp))
-        CustomImage(R.drawable.vacation) // Если R.drawable не виден, сделайте Build -> Rebuild Project
+        Spacer(Modifier.height(16.dp))
+        CustomImage(
+            image = R.drawable.vacation,
+            modifier = Modifier
+                .padding(16.dp)
+                .width(270.dp)
+                .clip(shape = RoundedCornerShape(30.dp)) // Скругление углов
+        )
     }
 }
 
